@@ -1,0 +1,85 @@
+@font-face {
+    font-family: Inter;
+    src: url(fonts/inter.ttf);
+}
+html, body{
+    background: #1d2021;
+}
+button{
+    cursor: pointer;
+}
+*{
+    font-family: Inter;
+    transition: 0.2s;
+}
+i{
+    color: #ebdbb2;
+}
+header{
+    padding: 0.25rem;
+}
+.topbar{
+    display: flex;
+    justify-content: center;
+}
+.topbar button{
+    background: #3c3836;
+    color: #fbf1c7;
+    padding: 0.5rem 1rem;
+    font-size: large;
+    border: none;
+    font-weight: bold;
+}
+.topbar button:hover{
+    background: #282828;
+}
+.firstbtn{
+    border-radius: 100rem 0 0 100rem;
+    border-right: 2px solid #1d2021;
+}
+.lastbtn{
+    border-radius: 0 100rem 100rem 0;
+}
+.explore{
+    padding: 2rem;
+}
+.explore .mod{
+    background: #282828;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+h2{
+    padding: 0;
+    margin: 0;
+}
+.explore div .info{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+.info{
+    width: 100%;
+}
+.info button{
+    width: 20rem;
+    background: #689d6a;
+    color: #1d2021;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: larger;
+    align-self: right;
+}
+.explore img{
+    width: 100px;
+    border-radius: 1rem;
+}
+.explore div .info h2{
+    color: #fbf1c7;
+}
+.explore div .info   p{
+    color: #ebdbb2;
+}
