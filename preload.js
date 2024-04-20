@@ -6,7 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
         ipcRenderer.on("sendPrefs", message)
     },
     download: (downloadID, version) => ipcRenderer.send('downloadID', downloadID, version),
-    downloadProgress: (downloadPercentage) => ipcRenderer.send('downloadProgress', downloadPercentage),
+    downloadProgress: (downloadPercentage) => ipcRenderer.on('downloadProgress', downloadPercentage),
     downloadComplete: (idk) => {
         ipcRenderer.on("downloadComplete", idk)
     },

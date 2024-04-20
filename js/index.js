@@ -39,7 +39,7 @@ function divMod(titletext, description, id="idk", iconURL){
 
 
 electronAPI.downloadComplete((event) => {
-    alert("Download Finished")
+    
 })
 
 $(".modlistbtn").click(function (e) { 
@@ -113,4 +113,8 @@ electronAPI.exploremods((event, mods) => {
         e.preventDefault();
         electronAPI.download($(this).parent().parent().attr("downloadID"), $(".version").val())
     });
+})
+electronAPI.downloadProgress((evenet, progr) => {
+    $("progress").val(progr);
+    console.log(progr)
 })

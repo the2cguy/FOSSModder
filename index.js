@@ -33,14 +33,14 @@ function searchMods(modname){
         console.log(JSON.stringify(modlist))
     })
 }
-searchMods("lazy")
 function updateModList(){
     var fossmodfiles = []
     var modfiles = []
-    fs.readdirSync("fossmods").forEach(file => {
+    console.log(db.get("preferences.minecraftDir").value()+"/fossmods")
+    fs.readdirSync(db.get("preferences.minecraftDir").value()+"/fossmods").forEach(file => {
         fossmodfiles.push(file.toString())
     })
-    fs.readdirSync("mods").forEach(file => {
+    fs.readdirSync(db.get("preferences.minecraftDir").value()+"/mods").forEach(file => {
         modfiles.push(file.toString())
     })
     console.log(db.get("modlist").value().length.toString()+" MODS TO DELETE")
@@ -56,7 +56,7 @@ function updateModList(){
         }
     }
 }
-updateModList()
+
 function downloadfromID(id, version){
     var urlDownload
     var req = request.get("https://api.modrinth.com/v2/project/"+id+"/version", {json:true}, (err, resp, body) => {
@@ -158,6 +158,8 @@ function createWin(){
             fs.mkdirSync(db.get("preferences.minecraftDir").value()+"/fossmods")
         }
         win.loadFile("index.html").then(sendPrefs).then(sendModList)
+        updateModList()
+        searchMods("lazy")
 
     }
 }
