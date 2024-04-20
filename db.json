@@ -1,4 +1,61 @@
 {
-  "preferences": {},
-  "modlist": []
+  "preferences": {
+    "minecraftDir": "/home/corneliuschristian/.minecraft"
+  },
+  "modlist": [
+    {
+      "modname": "Iris Shaders",
+      "version": "1.20.4",
+      "enabled": true,
+      "filename": "iris-mc1.20.4-1.6.17.jar",
+      "iconURL": "https://cdn.modrinth.com/data/YL57xq9U/dc558eece920db435f9823ce86de0c4cde89800b.png",
+      "downloadID": "YL57xq9U",
+      "description": "A modern shaders mod for Minecraft intended to be compatible with existing OptiFine shader packs"
+    },
+    {
+      "modname": "Lithium",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "lithium-fabric-mc1.20.4-0.12.1.jar",
+      "iconURL": "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png",
+      "downloadID": "gvQqBUqZ",
+      "description": "No-compromises game logic/server optimization mod"
+    },
+    {
+      "modname": "Mod Menu",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "modmenu-9.1.0-beta.1.jar",
+      "iconURL": "https://cdn.modrinth.com/data/mOgUt4GM/1b6bcdef5a3d92572f517122650716be7ec6458b.webp",
+      "downloadID": "mOgUt4GM",
+      "description": "Adds a mod menu to view the list of mods you have installed."
+    },
+    {
+      "modname": "Cloth Config API",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "cloth-config-13.0.121-fabric.jar",
+      "iconURL": "https://cdn.modrinth.com/data/9s6osm5g/icon.png",
+      "downloadID": "9s6osm5g",
+      "description": "Configuration Library for Minecraft Mods"
+    },
+    {
+      "modname": "Entity Culling",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "entityculling-fabric-1.6.4-mc1.20.4.jar",
+      "iconURL": "https://cdn.modrinth.com/data/NNAgCjsB/icon.png",
+      "downloadID": "NNAgCjsB",
+      "description": "Using async path-tracing to hide Block-/Entities that are not visible"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.20.4",
+      "enabled": true,
+      "filename": "sodium-fabric-mc1.17.1-0.3.4%2Bbuild.13.jar",
+      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "downloadID": "AANobbMI",
+      "description": "A modern rendering engine for Minecraft which greatly improves performance"
+    }
+  ]
 }

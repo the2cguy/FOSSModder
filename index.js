@@ -34,27 +34,14 @@ function searchMods(modname){
     })
 }
 function updateModList(){
-    var fossmodfiles = []
-    var modfiles = []
-    console.log(db.get("preferences.minecraftDir").value()+"/fossmods")
-    fs.readdirSync(db.get("preferences.minecraftDir").value()+"/fossmods").forEach(file => {
-        fossmodfiles.push(file.toString())
-    })
-    fs.readdirSync(db.get("preferences.minecraftDir").value()+"/mods").forEach(file => {
-        modfiles.push(file.toString())
-    })
-    console.log(db.get("modlist").value().length.toString()+" MODS TO DELETE")
-    var k = db.get("modlist").value().length
-    for(var i = 0;i < k; i++){
-        console.log(i)
-        if(!modfiles.includes(db.get("modlist").value()[0].filename) && !fossmodfiles.includes(db.get("modlist").value()[0].filename)){
-            db.get("modlist").remove({filename:db.get("modlist").value()[0].filename}).write()
-            console.log("removed")
-        }else{
-            //console.log(modfiles)
-            console.log(modfiles.includes(db.get("modlist").value()[i].filename))
+    db.get("modlist").value().forEach(element => {
+        var disabledmod = fs.existsSync(db.get("preferences.minecraftDir").value()+"/fossmods/"+element.filename)
+        var enabledmod = fs.existsSync(db.get("preferences.minecraftDir").value()+"/mods/"+element.filename)
+        if(!disabledmod && !enabledmod){
+            db.get("modlist").remove({downloadID:element.downloadID}).write()
+            console.log("REMOVEDREMOVEDREMOVEDREMOVED")
         }
-    }
+    });
 }
 
 function downloadfromID(id, version){
@@ -66,7 +53,7 @@ function downloadfromID(id, version){
         return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
     })[0].files[0].url
     var filename = db.get("preferences.minecraftDir").value()+"/fossmods/"+urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]
-    if(db.get("modlist").find({filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]}).value() == null){
+    if(db.get("modlist").find({downloadID: id}).value() == null){
         console.log(db.get("modlist").find({filename: filename}).value());
         console.log(filename)
             var file = fs.createWriteStream(filename)
