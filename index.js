@@ -18,7 +18,7 @@ function searchMods(modname){
     console.log("THEFIRST")
     var modlist = []
     var projects
-    request.get("https://api.modrinth.com/v2/search?"+modname, {json:true}, (err, resp, body) => {
+    request.get("https://api.modrinth.com/v2/search?query="+modname, {json:true}, (err, resp, body) => {
         projects = JSON.stringify(body)
         projects = JSON.parse(projects)
         for(var i=0;i<10;i++){
