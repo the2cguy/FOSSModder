@@ -4,7 +4,7 @@ $(".topbar button").click(function (e) {
     $(this).css("background", "#282828");
 });
 $(".firstbtn").css("background", "#282828")
-
+var modlist = []
 function divMod(titletext, description, iconurl, id="idk"){
     var div = document.createElement("div");
     var infodiv = document.createElement("div")
@@ -16,11 +16,11 @@ function divMod(titletext, description, iconurl, id="idk"){
     var icon = document.createElement("img")
     $(icon).attr("src", iconurl);
     var btn = document.createElement("button")
-    var existed = electronAPI.checkMod()
-    if (existed){
-        $(btn).css("background", "transparent")
-    }
     btn.innerHTML = '<i class="bi bi-check-all"></i> Add Mod to list';
+    if(_.find(modlist, {downloadID: id})){
+        $(btn).addClass("btndisabled");
+        $(btn).text("Mod already exist");
+    }
     $(infodiv).append(title);
     $(infodiv).append(p);
     $(infodiv).append(btn);
@@ -35,18 +35,12 @@ function divMod(titletext, description, iconurl, id="idk"){
     
 }
 
-divMod("Lithium", "Fun Stuffs", "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png", "gvQqBUqZ")
 $(".mod").click(function (e) { 
     e.preventDefault();
     electronAPI.download($(this).downloadID)
 });
 
-$(".info button").click(function (e) { 
-    e.preventDefault();
-    var downloadID = ($(this).parent().parent().attr("downloadID"))
-    electronAPI.download(downloadID)
-    console.log(downloadID)
-});
+
 electronAPI.downloadComplete((event) => {
     alert("Download Finished")
 })
@@ -61,8 +55,19 @@ $(".firstbtn").click(function (e) {
     $(".explore").show();
     $(".modlist").hide();
 });
-$('.firstbtn').click()
 
 electronAPI.modExisted(() => {
     alert("Mod already exists!")
+})
+electronAPI.modList((event, mods) => {
+    modlist = JSON.parse(mods)
+    $(".explore").empty();
+    // Code below adds recommended mods. Not directly tied to modList, so it doesn't depend on modList but rather can be updated from another list.
+    divMod("Lithium", "Fun Stuffs", "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png", "gvQqBUqZ")
+    divMod("Sodium", "Fun Stuffs", "https://cdn.modrinth.com/data/AANobbMI/icon.png", "sodium")
+    $(".info button").click(function (e) { 
+        var downloadID = ($(this).parent().parent().attr("downloadID"))
+        electronAPI.download(downloadID)
+        console.log(downloadID)
+    });
 })

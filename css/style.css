@@ -93,3 +93,11 @@ h2{
 .explore div .info   p{
     color: #ebdbb2;
 }
+
+.btndisabled{
+    background: #3c3836 !important;
+    border-bottom: 5px solid #504945 !important;
+}
+.btndisabled:hover{
+    border-bottom: 0px solid #504945 !important;
+}

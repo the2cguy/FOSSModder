@@ -13,5 +13,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     modExisted: (callback) => {
         ipcRenderer.on("modExisted", callback)
     },
-    checkMod: (downloadID) => ipcRenderer.send("checkMod", downloadID)
+    modList: (thelist) => ipcRenderer.on("modList", thelist)
 })

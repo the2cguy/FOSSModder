@@ -1,5 +1,23 @@
 {
   "preferences": {
     "minecraftDir": "/home/corneliuschristian/.minecraft"
-  }
+  },
+  "modlist": [
+    {
+      "modname": "Lithium",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "lithium-fabric-mc1.20.4-0.12.1.jar",
+      "iconURL": "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png",
+      "downloadID": "gvQqBUqZ"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "sodium-fabric-0.5.8%2Bmc1.20.4.jar",
+      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "downloadID": "sodium"
+    }
+  ]
 }

@@ -70,6 +70,7 @@ function downloadfromID(id, version){
                     iconURL: data.icon_url,
                     downloadID: id
                 }).write()
+                win.webContents.send('modList', JSON.stringify(db.get('modlist').value()))
             })
     }else{
         win.webContents.send('modExisted')
@@ -108,15 +109,15 @@ function createWin(){
     if (db.get("preferences.minecraftDir").value() == null){
         win.loadFile("select.html").then(sendPrefs)
     }else{
-        win.loadFile("index.html").then(sendPrefs)
+        win.loadFile("index.html").then(sendPrefs).then(sendModList)
     }
 }
 function sendPrefs(){
     win.webContents.send('sendPrefs', db.get("preferences").value())
     console.log(db.get("preferences").value())
 }
-async function sendModCheck(){
-    return db.get("modlist").find({downloadID:downloadID}).value() != null
+function sendModList(){
+    win.webContents.send('modList', JSON.stringify(db.get('modlist').value()))
 }
 app.whenReady().then(() => {
     createWin()
