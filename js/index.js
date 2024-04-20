@@ -16,7 +16,7 @@ function divMod(titletext, description, id="idk", iconURL){
     var icon = document.createElement("img")
     $(icon).attr("src", iconURL);
     var btn = document.createElement("button")
-    btn.innerHTML = '<i class="bi bi-check-all"></i> Add Mod to list';
+    btn.innerHTML = '<i class="bi bi-check-all"></i> Add to Modlist';
     if(_.find(modlist, {downloadID: id})){
         $(btn).addClass("btndisabled");
         $(btn).text("Mod already exist");
