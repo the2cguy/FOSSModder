@@ -15,8 +15,11 @@ function divMod(titletext, description, iconurl, id="idk"){
     $(p).text(description);
     var icon = document.createElement("img")
     $(icon).attr("src", iconurl);
+    var btn = document.createElement("button")
+    btn.innerHTML = '<i class="bi bi-check-all"></i> Add Mod to list';
     $(infodiv).append(title);
     $(infodiv).append(p);
+    $(infodiv).append(btn);
     div .appendChild(document.createElement("div").appendChild(icon))
     $(div).addClass("imgdiv");
     var k = document.createElement("div")
@@ -26,8 +29,20 @@ function divMod(titletext, description, iconurl, id="idk"){
     $(k).addClass("mod");
     $(".explore").append(k);
 }
-divMod("Lithium", "Fun Stuffs", "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png")
+
+divMod("Lithium", "Fun Stuffs", "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png", "gvQqBUqZ")
 $(".mod").click(function (e) { 
     e.preventDefault();
     electronAPI.download($(this).downloadID)
 });
+
+$(".info button").click(function (e) { 
+    e.preventDefault();
+    var downloadID = ($(this).parent().parent().attr("downloadID"))
+    electronAPI.download(downloadID)
+    console.log(downloadID)
+});
+electronAPI.downloadComplete(() => {
+    console.log("Aaaaaaa")
+    alert("Download Finished")
+})
