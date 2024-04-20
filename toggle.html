@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="jquery/jquery.js"></script>
+</head>
+<body>
+    <div class="toggle-btn active" style="display: hidden;">
+        <input type="checkbox"  checked class="cb-value" />
+        <span class="round-btn"></span>
+      </div>
+<script>
+    $("a.toggler").click(function (e) { 
+    e.preventDefault();
+    $(this).toggleClass("off");
+});
+</script>
+</body>
+</html>

@@ -49,7 +49,7 @@ header{
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
-    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 h2{
     padding: 0;
@@ -100,4 +100,41 @@ h2{
 }
 .btndisabled:hover{
     border-bottom: 0px solid #504945 !important;
+}
+.modlist{
+    padding: 2rem;
+}
+.moditem{
+    display: flex;
+    background: #282828;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.modimgdiv img{
+    width: 100px;
+    border-radius: 1rem;
+}
+.moddescriptiondiv{
+    margin-left: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.moddescriptiondiv{
+    color:#fbf1c7;
+}
+.togglebox{
+    align-self: end;
+}
+.version{
+    margin-left: 1rem;
+    border: 2px solid #282828;
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    background: none;
+    outline: none;
+    font-size: large;
+    color: #ebdbb2;
 }

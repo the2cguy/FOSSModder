@@ -4,20 +4,13 @@
   },
   "modlist": [
     {
-      "modname": "Lithium",
+      "modname": "Fabric API",
       "version": "1.20.4",
       "enabled": false,
-      "filename": "lithium-fabric-mc1.20.4-0.12.1.jar",
-      "iconURL": "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png",
-      "downloadID": "gvQqBUqZ"
-    },
-    {
-      "modname": "Sodium",
-      "version": "1.20.4",
-      "enabled": false,
-      "filename": "sodium-fabric-0.5.8%2Bmc1.20.4.jar",
-      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
-      "downloadID": "sodium"
+      "filename": "fabric-api-0.97.0%2B1.20.4.jar",
+      "iconURL": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
+      "downloadID": "P7dR8mSH",
+      "description": "Lightweight and modular API providing common hooks and intercompatibility measures utilized by mods using the Fabric toolchain."
     }
   ]
 }

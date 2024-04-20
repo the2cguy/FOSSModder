@@ -5,7 +5,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     preferences: (message) => {
         ipcRenderer.on("sendPrefs", message)
     },
-    download: (downloadID) => ipcRenderer.send('downloadID', downloadID),
+    download: (downloadID, version) => ipcRenderer.send('downloadID', downloadID, version),
     downloadProgress: (downloadPercentage) => ipcRenderer.send('downloadProgress', downloadPercentage),
     downloadComplete: (idk) => {
         ipcRenderer.on("downloadComplete", idk)
@@ -13,5 +13,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     modExisted: (callback) => {
         ipcRenderer.on("modExisted", callback)
     },
-    modList: (thelist) => ipcRenderer.on("modList", thelist)
+    modList: (thelist) => ipcRenderer.on("modList", thelist),
+    enableMod: (downloadID) => ipcRenderer.send('enableMod', downloadID),
+    disableMod: (downloadID) => ipcRenderer.send('disableMod', downloadID),
+    exploremods: (modlist) => ipcRenderer.on("exploremods", modlist)
 })
