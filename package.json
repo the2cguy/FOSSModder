@@ -1,6 +1,6 @@
 {
   "name": "fossmodder",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "Free and Open Source Minecraft Mod Installer",
   "main": "index.js",
   "scripts": {
