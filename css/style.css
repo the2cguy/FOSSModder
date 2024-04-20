@@ -62,17 +62,25 @@ h2{
     width: 100%;
 }
 .info button{
-    width: 20rem;
+    width: 15rem;
     background: #689d6a;
-    color: #1d2021;
+    color: #ebdbb2;
     padding: 1rem;
     border-radius: 0.5rem;
     float: right;
     border: none;
     font-size: larger;
-    align-self: right;
+    align-self: end;
+    border-bottom: 5px solid #468553;
+    font-weight: bold;
+    transform: translateY(0px);
+}
+.info button i{
+    color: #ebdbb2;
 }
 .info button:hover{
+    transform: translateY(5px);
+    border-bottom: 0px solid #468553;
     background: #8ec07c;
 }
 .explore img{

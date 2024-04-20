@@ -13,38 +13,70 @@ var request = require("request")
 var http = require('http')
 
 var selectedversion = "1.20.4"
-db.defaults({preferences: {}}).write()
-
+db.defaults({preferences: {}, modlist: []}).write()
+function updateModList(){
+    var modfiles = []
+    fs.readdirSync("fossmods").forEach(file => {
+        modfiles.push(file.toString())
+    })
+    db.get("modlist").value().forEach(element => {
+        if(!modfiles.includes(element.filename.toString())){
+            db.get("modlist").remove({filename:element.filename}).write()
+            console.log("removed")
+        }
+    });
+    console.log(modfiles[0])
+}
+updateModList()
 function downloadfromID(id, version){
     var urlDownload
     var req = request.get("https://api.modrinth.com/v2/project/"+id+"/version", {json:true}, (err, resp, body) => {
-        var validversions = _.values(body)
-        urlDownload =  _.filter(validversions, function(vers){
-            // This is the filters/options
-            return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
-        })[0].files[0].url
-        var file = fs.createWriteStream(urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1])
-        var currentLen = 0
-        var progress = 0.1
-        var maxProgress = 0
-        var req = request.get(urlDownload)
-        req.pipe(file)
-        req.on("response", (resp) => {
-            maxProgress = resp.headers["content-length"]
-        })
-        req.on('data', (chunk) => {
-            currentLen += chunk.length
-            console.log(currentLen/maxProgress*100)
-            win.webContents.send('downloadProgress', currentLen/maxProgress*100)
-        })
-        req.on('complete', () => {
-            win.webContents.send('downloadComplete')
-            file.close()
-            console.log("finished")
-        })
+    var validversions = _.values(body)
+    urlDownload =  _.filter(validversions, function(vers){
+        // This is the filters/options
+        return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
+    })[0].files[0].url
+    var filename = "fossmods/"+urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]
+    if(db.get("modlist").find({filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]}).value() == null){
+        console.log(db.get("modlist").find({filename: filename}).value());
+        console.log(filename)
+            var file = fs.createWriteStream(filename)
+            var currentLen = 0
+            var progress = 0.1
+            var maxProgress = 0
+            var req = request.get(urlDownload)
+            req.pipe(file)
+            req.on("response", (resp) => {
+                maxProgress = resp.headers["content-length"]
+            })
+            req.on('data', (chunk) => {
+                currentLen += chunk.length
+                //console.log(currentLen/maxProgress*100)
+                win.webContents.send('downloadProgress', currentLen/maxProgress*100)
+            })
+            req.on('complete', () => {
+                win.webContents.send('downloadComplete')
+                file.close()
+                console.log("finished")
+            })
+            var modtitle
+            request.get("https://api.modrinth.com/v2/project/"+id, {json:true}, (error, response, data) => {
+                modtitle = data.title
+                db.get("modlist").push({
+                    modname: modtitle,
+                    version: selectedversion,
+                    enabled: false,
+                    filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1],
+                    iconURL: data.icon_url,
+                    downloadID: id
+                }).write()
+            })
+    }else{
+        win.webContents.send('modExisted')
+        return
+    }
     })
 }
-downloadfromID("sodium", selectedversion)
 function createWin(){
     win = new BrowserWindow({
         width: 1000,
@@ -83,4 +115,10 @@ function sendPrefs(){
     win.webContents.send('sendPrefs', db.get("preferences").value())
     console.log(db.get("preferences").value())
 }
-app.whenReady().then(() => createWin())
+async function sendModCheck(){
+    return db.get("modlist").find({downloadID:downloadID}).value() != null
+}
+app.whenReady().then(() => {
+    createWin()
+    //ipcMain.handle("checkMod", sendModCheck)
+})

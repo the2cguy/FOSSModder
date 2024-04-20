@@ -16,6 +16,10 @@ function divMod(titletext, description, iconurl, id="idk"){
     var icon = document.createElement("img")
     $(icon).attr("src", iconurl);
     var btn = document.createElement("button")
+    var existed = electronAPI.checkMod()
+    if (existed){
+        $(btn).css("background", "transparent")
+    }
     btn.innerHTML = '<i class="bi bi-check-all"></i> Add Mod to list';
     $(infodiv).append(title);
     $(infodiv).append(p);
@@ -28,6 +32,7 @@ function divMod(titletext, description, iconurl, id="idk"){
     $(k).attr("downloadID", id);
     $(k).addClass("mod");
     $(".explore").append(k);
+    
 }
 
 divMod("Lithium", "Fun Stuffs", "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png", "gvQqBUqZ")
@@ -42,7 +47,22 @@ $(".info button").click(function (e) {
     electronAPI.download(downloadID)
     console.log(downloadID)
 });
-electronAPI.downloadComplete(() => {
-    console.log("Aaaaaaa")
+electronAPI.downloadComplete((event) => {
     alert("Download Finished")
+})
+
+$(".modlistbtn").click(function (e) { 
+    e.preventDefault();
+    $(".explore").hide();
+    $(".modlist").show();
+});
+$(".firstbtn").click(function (e) { 
+    e.preventDefault();
+    $(".explore").show();
+    $(".modlist").hide();
+});
+$('.firstbtn').click()
+
+electronAPI.modExisted(() => {
+    alert("Mod already exists!")
 })
