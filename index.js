@@ -20,7 +20,7 @@ function downloadfromID(id, version){
         urlDownload =  _.filter(validversions, function(vers){
             return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
         })[0].files[0].url
-        var file = fs.createWriteStream("themod.jar")
+        var file = fs.createWriteStream(urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1])
         var req = request.get(urlDownload).pipe(file).on('finish', () => console.log("FINISHED"))
         
     })
