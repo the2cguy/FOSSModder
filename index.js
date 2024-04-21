@@ -13,7 +13,7 @@ var request = require("request")
 var http = require('http')
 var SHA256 = require("crypto-js/sha256");
 
-
+var searchQuery = ""
 var selectedversion = "1.20.4"
 db.defaults({preferences: {}, modlist: []}).write()
 function searchMods(modname){
@@ -53,7 +53,12 @@ function downloadfromID(id, version){
     urlDownload =  _.filter(validversions, function(vers){
         // This is the filters/options
         return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
-    })[0].files[0].url
+    })
+    if (urlDownload.length < 1){
+        win.webContents.send("versionInvalid")
+        return
+    }
+    urlDownload = urlDownload[0].files[0].url
     var filename = db.get("preferences.minecraftDir").value()+"/fossmods/"+urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]
     if(db.get("modlist").find({hash: SHA256(id+version).toString()}).value() == null){
         console.log(filename)
@@ -75,7 +80,7 @@ function downloadfromID(id, version){
                 win.webContents.send('downloadComplete')
                 file.close()
                 console.log("finished")
-                searchMods("sodium")
+                searchMods(searchQuery)
                 var modtitle
                 request.get("https://api.modrinth.com/v2/project/"+id, {json:true}, (error, response, data) => {
                     modtitle = data.title
@@ -90,7 +95,7 @@ function downloadfromID(id, version){
                         hash: SHA256(id+version).toString()
                     }).write()
                     win.webContents.send('modList', JSON.stringify(db.get('modlist').value()))
-                    searchMods("sodium")
+                    searchMods(searchQuery)
                 })
                 
                 console.log(JSON.stringify(db.get('modlist').value()))
@@ -103,9 +108,11 @@ function downloadfromID(id, version){
 }
 function createWin(){
     win = new BrowserWindow({
-        width: 1000,
-        height: 800,
-        resizable: false,
+        minWidth: 1200,
+        minHeight: 800,
+        maxWidth: 1500,
+        maxHeight: 1200,
+        resizable: true,
         autoHideMenuBar: true,
         webPreferences:{
             preload: __dirname + "/preload.js"
@@ -143,8 +150,9 @@ function createWin(){
         console.log(hash)
         fs.renameSync(db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({hash:hash}).value().filename, db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({hash:hash}).value().filename)
     })
-    ipcMain.on('requestexplore', (e) => {
-        searchMods("sodium")
+    ipcMain.on('requestexplore', (e, q) => {
+        searchQuery = q
+        searchMods(searchQuery)
     })
     if (db.get("preferences.minecraftDir").value() == null){
         win.loadFile("select.html").then(sendPrefs)
@@ -154,8 +162,7 @@ function createWin(){
         }
         win.loadFile("index.html").then(sendPrefs).then(sendModList)
         updateModList()
-        searchMods("sodium")
-
+        searchMods(searchQuery)
     }
 }
 function sendPrefs(){

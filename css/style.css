@@ -144,3 +144,25 @@ progress{
     margin-right: 1rem;
     margin-top: 0.7rem;
 }
+#searchquery{
+    margin-right: 1rem;
+    padding: 0.5rem;
+    background: #282828;
+    border: 3px solid #3c3836;
+    border-radius: 200rem;
+    padding-left: 1rem;
+    font-size: large;
+    outline: none;
+    color: #ebdbb2;
+    font-weight: bold;
+}
+#searchbtn{
+    background: #3c3836;
+    border: 3px solid #3c3836;
+    border-radius: 100rem;
+    margin-right: 1rem;
+    font-size: large;
+}
+#searchbtn:hover{
+    background: #282828;
+}

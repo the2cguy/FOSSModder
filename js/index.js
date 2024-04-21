@@ -113,6 +113,13 @@ electronAPI.downloadProgress((evenet, progr) => {
 electronAPI.updateExplore((e, explorelist) => {
     updateExplorePage(explorelist)
 })
+electronAPI.versionInvalid((e) => {
+    alert("Version Not Available")
+})
 $("select").on("change", function () {
-    electronAPI.requestexplore()
+    electronAPI.requestexplore($("#searchquery").val())
+});
+$("#searchbtn").click(function (e) { 
+    e.preventDefault();
+    electronAPI.requestexplore($("#searchquery").val())
 });

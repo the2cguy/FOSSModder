@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOSSModder (v0.1.0)</title>
+    <title>Osmosis (v1.3.0)</title>
     <link rel="stylesheet" href="css/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="jquery/jquery.js"></script>
@@ -13,7 +13,9 @@
 <body>
     <header style="position: sticky;top: 0;left: 0;z-index: 2;">
         <div class="topbar">
-            <progress id="file" value="0" max="100"> 32% </progress>
+            <progress id="file" value="0" max="100" style="width: 100px;"> 32% </progress>
+            <input type="text" id="searchquery" placeholder="Search mods...">
+            <button id="searchbtn"><i class="bi bi-search-heart-fill"></i></button>
             <button class="firstbtn"><i class="bi bi-stars"></i> Explore</button>
             <button class="modlistbtn"><i class="bi bi-puzzle-fill"></i> Mods</button>
             <button class="lastbtn"><i class="bi bi-gear-fill"></i> Settings</button>
