@@ -17,5 +17,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     enableMod: (downloadID) => ipcRenderer.send('enableMod', downloadID),
     disableMod: (downloadID) => ipcRenderer.send('disableMod', downloadID),
     exploremods: (modlist) => ipcRenderer.on("exploremods", modlist),
-    updateexplore: () => ipcRenderer.send('updateexplore')
+    updateExplore: (explorelist) => ipcRenderer.on('updateExplore', explorelist),
+    requestexplore: () => ipcRenderer.send('requestexplore')
 })

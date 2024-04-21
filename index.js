@@ -31,7 +31,7 @@ function searchMods(modname){
                 iconURL:projects.hits[i].icon_url
             })
         }
-        win.webContents.send('exploremods', JSON.stringify(modlist))
+        win.webContents.send('updateExplore', JSON.stringify(modlist))
         console.log(JSON.stringify(modlist))
     })
 }
@@ -56,7 +56,6 @@ function downloadfromID(id, version){
     })[0].files[0].url
     var filename = db.get("preferences.minecraftDir").value()+"/fossmods/"+urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]
     if(db.get("modlist").find({hash: SHA256(id+version).toString()}).value() == null){
-        console.log(db.get("modlist").find({filename: filename}).value());
         console.log(filename)
             var file = fs.createWriteStream(filename)
             var currentLen = 0
@@ -76,22 +75,25 @@ function downloadfromID(id, version){
                 win.webContents.send('downloadComplete')
                 file.close()
                 console.log("finished")
-                searchMods("lazy")
-                win.webContents.send('modList', JSON.stringify(db.get('modlist').value()))
-            })
-            var modtitle
-            request.get("https://api.modrinth.com/v2/project/"+id, {json:true}, (error, response, data) => {
-                modtitle = data.title
-                db.get("modlist").push({
-                    modname: modtitle,
-                    version: version,
-                    enabled: false,
-                    filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1],
-                    iconURL: data.icon_url,
-                    downloadID: id,
-                    description: data.description,
-                    hash: SHA256(id+version).toString()
-                }).write()
+                searchMods("sodium")
+                var modtitle
+                request.get("https://api.modrinth.com/v2/project/"+id, {json:true}, (error, response, data) => {
+                    modtitle = data.title
+                    db.get("modlist").push({
+                        modname: modtitle,
+                        version: version,
+                        enabled: false,
+                        filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1],
+                        iconURL: data.icon_url,
+                        downloadID: id,
+                        description: data.description,
+                        hash: SHA256(id+version).toString()
+                    }).write()
+                    win.webContents.send('modList', JSON.stringify(db.get('modlist').value()))
+                    searchMods("sodium")
+                })
+                
+                console.log(JSON.stringify(db.get('modlist').value()))
             })
     }else{
         win.webContents.send('modExisted')
@@ -127,22 +129,22 @@ function createWin(){
             downloadfromID(downloadID, version)
         }
     })
-    ipcMain.on('enableMod', (event, downloadID) => {
+    ipcMain.on('enableMod', (event, hash) => {
         console.log("YEAY")
-        db.get("modlist").find({downloadID:downloadID}).value().enabled = true
+        db.get("modlist").find({hash:hash}).value().enabled = true
         db.write()
-        console.log(downloadID)
-        fs.renameSync(db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({downloadID:downloadID}).value().filename, db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({downloadID:downloadID}).value().filename)
+        console.log(hash)
+        fs.renameSync(db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({hash:hash}).value().filename, db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({hash:hash}).value().filename)
     })
-    ipcMain.on("updateexplore", (event) => {
-        searchMods("lazy")
-    })
-    ipcMain.on('disableMod', (event, downloadID) => {
+    ipcMain.on('disableMod', (event, hash) => {
         console.log("YOAY")
-        db.get("modlist").find({downloadID:downloadID}).value().enabled = false
+        db.get("modlist").find({hash:hash}).value().enabled = false
         db.write()
-        console.log(downloadID)
-        fs.renameSync(db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({downloadID:downloadID}).value().filename, db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({downloadID:downloadID}).value().filename)
+        console.log(hash)
+        fs.renameSync(db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({hash:hash}).value().filename, db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({hash:hash}).value().filename)
+    })
+    ipcMain.on('requestexplore', (e) => {
+        searchMods("sodium")
     })
     if (db.get("preferences.minecraftDir").value() == null){
         win.loadFile("select.html").then(sendPrefs)
@@ -152,7 +154,7 @@ function createWin(){
         }
         win.loadFile("index.html").then(sendPrefs).then(sendModList)
         updateModList()
-        searchMods("lazy")
+        searchMods("sodium")
 
     }
 }

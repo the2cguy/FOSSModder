@@ -4,16 +4,6 @@
   },
   "modlist": [
     {
-      "modname": "Fabric API",
-      "version": "1.20.4",
-      "enabled": false,
-      "filename": "fabric-api-0.97.0%2B1.20.4.jar",
-      "iconURL": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
-      "downloadID": "P7dR8mSH",
-      "description": "Lightweight and modular API providing common hooks and intercompatibility measures utilized by mods using the Fabric toolchain.",
-      "hash": "5e4c56a0de542f5972b393eabba1275dfaffe0aa08fbeeaed664fa7d11b72f7f"
-    },
-    {
       "modname": "Sodium",
       "version": "1.20.4",
       "enabled": false,
@@ -24,14 +14,34 @@
       "hash": "e1e757a78b254617142e8a070345db9590c4bf9463c5a1b58d6b8d6c9b9f2bc7"
     },
     {
-      "modname": "Sodium",
-      "version": "1.19.1",
+      "modname": "Sodium Extra",
+      "version": "1.20.4",
       "enabled": false,
-      "filename": "sodium-fabric-mc1.19.2-0.4.4%2Bbuild.18.jar",
+      "filename": "sodium-extra-0.5.4%2Bmc1.20.4-build.116.jar",
+      "iconURL": "https://cdn.modrinth.com/data/PtjYWJkn/icon.png",
+      "downloadID": "PtjYWJkn",
+      "description": "A Sodium addon that adds features that shouldn't be in Sodium.",
+      "hash": "f2f8f3ab723a8c75613796ff9bcec58ae613e8358ae5f503ea45f99637f904cd"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.17.1",
+      "enabled": true,
+      "filename": "sodium-fabric-mc1.17.1-0.3.4%2Bbuild.13.jar",
       "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
       "downloadID": "AANobbMI",
       "description": "A modern rendering engine for Minecraft which greatly improves performance",
-      "hash": "6413304a58ae6b2847808fcf66d5764cc0f9f53e9335313b268fc93271285441"
+      "hash": "1822fb83cff6228b441759a02885467cf889d29bb69a1b27122e31ab733a9421"
+    },
+    {
+      "modname": "Sodium Shadowy Path Blocks",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "sodium-shadowy-path-blocks-3.2.1.jar",
+      "iconURL": "https://cdn.modrinth.com/data/EIa1eiMm/icon.png",
+      "downloadID": "EIa1eiMm",
+      "description": "Reintroduces vanilla-like smooth lighting to non-full blocks (e.g. dirt paths and how they have dark shading when directly next to a full block) when using Sodium. ",
+      "hash": "290ec3e82d967acea4b3e53bb8af77efea0f52305f07f36f83aab59a5356bed5"
     }
   ]
 }

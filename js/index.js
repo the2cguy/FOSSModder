@@ -5,7 +5,7 @@ $(".topbar button").click(function (e) {
 });
 $(".firstbtn").css("background", "#282828")
 var modlist = []
-function divMod(titletext, description, id="idk", iconURL, version){
+function exploreModTemplate(titletext, description, id="idk", iconURL, version){
     var div = document.createElement("div");
     var infodiv = document.createElement("div")
     $(infodiv).addClass("info");
@@ -17,11 +17,12 @@ function divMod(titletext, description, id="idk", iconURL, version){
     $(icon).attr("src", iconURL);
     var btn = document.createElement("button")
     btn.innerHTML = '<i class="bi bi-check-all"></i> Add to Modlist';
-    if(_.find(modlist, {downloadID: id})){
+    if(_.find(modlist, {hash: CryptoJS.SHA256(id+version).toString()})){
         $(btn).addClass("btndisabled");
         $(btn).text("Mod already exist");
     }
     console.log(CryptoJS.SHA256(id+version).toString())
+    console.log(id+version)
     
     $(infodiv).append(title);
     $(infodiv).append(p);
@@ -36,13 +37,6 @@ function divMod(titletext, description, id="idk", iconURL, version){
     $(".explore").append(k);
     
 }
-
-
-
-
-electronAPI.downloadComplete((event) => {
-
-})
 
 $(".modlistbtn").click(function (e) { 
     e.preventDefault();
@@ -63,19 +57,14 @@ electronAPI.modList((event, mods) => {
     modlist = JSON.parse(mods)
     $(".modlist").empty();
     // Code below adds recommended mods. Not directly tied to modList, so it doesn't depend on modList but rather can be updated from another list.
-    $(".info button").click(function (e) { 
-        var downloadID = ($(this).parent().parent().attr("downloadID"))
-        electronAPI.download(downloadID)
-        console.log(downloadID.toString())
-    });
     modlist.forEach(element => {
         modListTemplate(element.modname, element.iconURL, element.version, element.enabled, element.downloadID)
     });
-    $(".toggle").click(function (e) { 
+    $(".toggle").click(function (e) {  
         if ($(this).is(":checked")){
-            electronAPI.enableMod($(this).parent().parent().attr("hash"))
+            electronAPI.enableMod($(this).parent().parent().parent().attr("hash"))
         }else{
-            electronAPI.disableMod($(this).parent().parent().attr("hash"))
+            electronAPI.disableMod($(this).parent().parent().parent().attr("hash"))
         }
     });
 })
@@ -106,21 +95,24 @@ function modListTemplate(title, imgurl, version, enabled, downloadID){
     $(".modlist").append(template);
     
 }
-electronAPI.exploremods((event, mods) => {
-    $(".explore").empty();
-    var modd = JSON.parse(mods);
-    modd.forEach(element => {
-        divMod(element.modtitle, element.description, element.downloadID, element.iconURL, $(".version").val())
-    });
-    $(".info button").click(function (e) { 
-        e.preventDefault();
-        electronAPI.download($(this).parent().parent().attr("downloadID"), $(".version").val())
-    });
-})
+function updateExplorePage(explorelist){
+        $(".explore").empty();
+        var explorelistJSON = JSON.parse(explorelist)
+        explorelistJSON.forEach(mod => {
+            exploreModTemplate(mod.modtitle, mod.description, mod.downloadID, mod.iconURL, $('.version').val())
+        });
+        $(".info button").click(function (e) { 
+            e.preventDefault();
+            electronAPI.download($(this).parent().parent().attr("downloadID"), $(".version").val());
+        });
+}
 electronAPI.downloadProgress((evenet, progr) => {
     $("progress").val(progr);
     console.log(progr)
 })
+electronAPI.updateExplore((e, explorelist) => {
+    updateExplorePage(explorelist)
+})
 $("select").on("change", function () {
-    electronAPI.updateexplore()
+    electronAPI.requestexplore()
 });
