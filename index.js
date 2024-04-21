@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron")
+const { app, BrowserWindow, ipcMain, dialog, Notification } = require("electron")
 const { path } = require("node:path")
 
 var _ = require("underscore");
@@ -55,7 +55,10 @@ function downloadfromID(id, version){
         return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
     })
     if (urlDownload.length < 1){
-        win.webContents.send("versionInvalid")
+        new Notification({
+            title: "Osmosis - Version Not Found",
+            body: "Mod is not available on current version."
+        }).show()
         return
     }
     urlDownload = urlDownload[0].files[0].url
@@ -101,7 +104,10 @@ function downloadfromID(id, version){
                 console.log(JSON.stringify(db.get('modlist').value()))
             })
     }else{
-        win.webContents.send('modExisted')
+        new Notification({
+            title: "Osmosis - Mod already exist",
+            body: "Mod exists in current configuration."
+        }).show()
         return
     }
     })

@@ -72,6 +72,46 @@
       "downloadID": "AANobbMI",
       "description": "A modern rendering engine for Minecraft which greatly improves performance",
       "hash": "794a85daf6739d0ddffb85bc427b54eab97e06e7e654659ceac36a3fd47c2fb0"
+    },
+    {
+      "modname": "Fabric API",
+      "version": "1.20.4",
+      "enabled": true,
+      "filename": "fabric-api-0.97.0%2B1.20.4.jar",
+      "iconURL": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
+      "downloadID": "P7dR8mSH",
+      "description": "Lightweight and modular API providing common hooks and intercompatibility measures utilized by mods using the Fabric toolchain.",
+      "hash": "5e4c56a0de542f5972b393eabba1275dfaffe0aa08fbeeaed664fa7d11b72f7f"
+    },
+    {
+      "modname": "Cloth Config API",
+      "version": "1.20.4",
+      "enabled": true,
+      "filename": "cloth-config-13.0.121-fabric.jar",
+      "iconURL": "https://cdn.modrinth.com/data/9s6osm5g/icon.png",
+      "downloadID": "9s6osm5g",
+      "description": "Configuration Library for Minecraft Mods",
+      "hash": "0138b080d91f5628533d9ebf5959e733138e5213d846727c4a0859916f6d34a4"
+    },
+    {
+      "modname": "Starlight (Fabric)",
+      "version": "1.20.4",
+      "enabled": true,
+      "filename": "starlight-1.1.3%2Bfabric.f5dcd1a.jar",
+      "iconURL": "https://cdn.modrinth.com/data/H8CaAYZC/icon.png",
+      "downloadID": "H8CaAYZC",
+      "description": "Rewrites the light engine to fix lighting performance and lighting errors",
+      "hash": "d5023e2c923d19c25abfdea7f48e727f5f46a5553a4e11501c7fb11aaf865b86"
+    },
+    {
+      "modname": "Starlight",
+      "version": "1.20.4",
+      "enabled": false,
+      "filename": "Starlight%20%201.0.1.mrpack",
+      "iconURL": "https://cdn.modrinth.com/data/s0DpII8u/708a51370a39f2065604f68083cb2248b5c99597.png",
+      "downloadID": "s0DpII8u",
+      "description": "\"Starlight\" is a performance-centric Minecraft modpack designed by \"Sylbyte\" for optimal, seamless, and smooth gameplay!",
+      "hash": "a9e874c6b8b690544cc733c3aed256fc2d589de7f41ae0f5109fd5943dbf4eaa"
     }
   ]
 }
