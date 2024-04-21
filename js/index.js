@@ -5,7 +5,7 @@ $(".topbar button").click(function (e) {
 });
 $(".firstbtn").css("background", "#282828")
 var modlist = []
-function divMod(titletext, description, id="idk", iconURL){
+function divMod(titletext, description, id="idk", iconURL, version){
     var div = document.createElement("div");
     var infodiv = document.createElement("div")
     $(infodiv).addClass("info");
@@ -21,6 +21,8 @@ function divMod(titletext, description, id="idk", iconURL){
         $(btn).addClass("btndisabled");
         $(btn).text("Mod already exist");
     }
+    console.log(CryptoJS.SHA256(id+version).toString())
+    
     $(infodiv).append(title);
     $(infodiv).append(p);
     $(infodiv).append(btn);
@@ -39,7 +41,7 @@ function divMod(titletext, description, id="idk", iconURL){
 
 
 electronAPI.downloadComplete((event) => {
-    
+
 })
 
 $(".modlistbtn").click(function (e) { 
@@ -64,23 +66,24 @@ electronAPI.modList((event, mods) => {
     $(".info button").click(function (e) { 
         var downloadID = ($(this).parent().parent().attr("downloadID"))
         electronAPI.download(downloadID)
-        console.log(downloadID)
+        console.log(downloadID.toString())
     });
     modlist.forEach(element => {
-        modListTemplate(element.modname, element.iconURL, element.description, element.enabled, element.downloadID)
+        modListTemplate(element.modname, element.iconURL, element.version, element.enabled, element.downloadID)
     });
     $(".toggle").click(function (e) { 
         if ($(this).is(":checked")){
-            electronAPI.enableMod($(this).parent().parent().parent().attr("downloadID"))
+            electronAPI.enableMod($(this).parent().parent().attr("hash"))
         }else{
-            electronAPI.disableMod($(this).parent().parent().parent().attr("downloadID"))
+            electronAPI.disableMod($(this).parent().parent().attr("hash"))
         }
     });
 })
-function modListTemplate(title, imgurl, description, enabled, downloadID){
+function modListTemplate(title, imgurl, version, enabled, downloadID){
     var template = document.createElement('div')
     $(template).addClass("moditem");
     $(template).attr("downloadID", downloadID);
+    $(template).attr("hash", CryptoJS.SHA256(downloadID+version).toString());
 
     var modimgdiv = document.createElement('div')
     $(modimgdiv).addClass("modimgdiv");
@@ -90,7 +93,7 @@ function modListTemplate(title, imgurl, description, enabled, downloadID){
     var moddescriptiondiv = document.createElement("div");
     $(moddescriptiondiv).addClass("moddescriptiondiv");
     moddescriptiondiv.innerHTML += "<h2>title</h2>".replace("title", title)
-    moddescriptiondiv.innerHTML += "<p>desc</p>".replace("desc", description)
+    moddescriptiondiv.innerHTML += "<p>desc</p>".replace("desc", version)
     if (enabled){
         moddescriptiondiv.innerHTML += "<div style='position: relative;' class='togglebox'><input type='checkbox' id='check"+title+"' class='toggle' checked></div>"
     }else{
@@ -107,7 +110,7 @@ electronAPI.exploremods((event, mods) => {
     $(".explore").empty();
     var modd = JSON.parse(mods);
     modd.forEach(element => {
-        divMod(element.modtitle, element.description, element.downloadID, element.iconURL)
+        divMod(element.modtitle, element.description, element.downloadID, element.iconURL, $(".version").val())
     });
     $(".info button").click(function (e) { 
         e.preventDefault();
@@ -118,3 +121,6 @@ electronAPI.downloadProgress((evenet, progr) => {
     $("progress").val(progr);
     console.log(progr)
 })
+$("select").on("change", function () {
+    electronAPI.updateexplore()
+});

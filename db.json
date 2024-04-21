@@ -4,58 +4,34 @@
   },
   "modlist": [
     {
-      "modname": "Iris Shaders",
-      "version": "1.20.4",
-      "enabled": true,
-      "filename": "iris-mc1.20.4-1.6.17.jar",
-      "iconURL": "https://cdn.modrinth.com/data/YL57xq9U/dc558eece920db435f9823ce86de0c4cde89800b.png",
-      "downloadID": "YL57xq9U",
-      "description": "A modern shaders mod for Minecraft intended to be compatible with existing OptiFine shader packs"
-    },
-    {
-      "modname": "Lithium",
+      "modname": "Fabric API",
       "version": "1.20.4",
       "enabled": false,
-      "filename": "lithium-fabric-mc1.20.4-0.12.1.jar",
-      "iconURL": "https://cdn.modrinth.com/data/gvQqBUqZ/icon.png",
-      "downloadID": "gvQqBUqZ",
-      "description": "No-compromises game logic/server optimization mod"
-    },
-    {
-      "modname": "Mod Menu",
-      "version": "1.20.4",
-      "enabled": false,
-      "filename": "modmenu-9.1.0-beta.1.jar",
-      "iconURL": "https://cdn.modrinth.com/data/mOgUt4GM/1b6bcdef5a3d92572f517122650716be7ec6458b.webp",
-      "downloadID": "mOgUt4GM",
-      "description": "Adds a mod menu to view the list of mods you have installed."
-    },
-    {
-      "modname": "Cloth Config API",
-      "version": "1.20.4",
-      "enabled": false,
-      "filename": "cloth-config-13.0.121-fabric.jar",
-      "iconURL": "https://cdn.modrinth.com/data/9s6osm5g/icon.png",
-      "downloadID": "9s6osm5g",
-      "description": "Configuration Library for Minecraft Mods"
-    },
-    {
-      "modname": "Entity Culling",
-      "version": "1.20.4",
-      "enabled": false,
-      "filename": "entityculling-fabric-1.6.4-mc1.20.4.jar",
-      "iconURL": "https://cdn.modrinth.com/data/NNAgCjsB/icon.png",
-      "downloadID": "NNAgCjsB",
-      "description": "Using async path-tracing to hide Block-/Entities that are not visible"
+      "filename": "fabric-api-0.97.0%2B1.20.4.jar",
+      "iconURL": "https://cdn.modrinth.com/data/P7dR8mSH/icon.png",
+      "downloadID": "P7dR8mSH",
+      "description": "Lightweight and modular API providing common hooks and intercompatibility measures utilized by mods using the Fabric toolchain.",
+      "hash": "5e4c56a0de542f5972b393eabba1275dfaffe0aa08fbeeaed664fa7d11b72f7f"
     },
     {
       "modname": "Sodium",
       "version": "1.20.4",
-      "enabled": true,
-      "filename": "sodium-fabric-mc1.17.1-0.3.4%2Bbuild.13.jar",
+      "enabled": false,
+      "filename": "sodium-fabric-0.5.8%2Bmc1.20.4.jar",
       "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
       "downloadID": "AANobbMI",
-      "description": "A modern rendering engine for Minecraft which greatly improves performance"
+      "description": "A modern rendering engine for Minecraft which greatly improves performance",
+      "hash": "e1e757a78b254617142e8a070345db9590c4bf9463c5a1b58d6b8d6c9b9f2bc7"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.19.1",
+      "enabled": false,
+      "filename": "sodium-fabric-mc1.19.2-0.4.4%2Bbuild.18.jar",
+      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "downloadID": "AANobbMI",
+      "description": "A modern rendering engine for Minecraft which greatly improves performance",
+      "hash": "6413304a58ae6b2847808fcf66d5764cc0f9f53e9335313b268fc93271285441"
     }
   ]
 }

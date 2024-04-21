@@ -11,6 +11,8 @@ var db = low(adapter)
 var win
 var request = require("request")
 var http = require('http')
+var SHA256 = require("crypto-js/sha256");
+
 
 var selectedversion = "1.20.4"
 db.defaults({preferences: {}, modlist: []}).write()
@@ -53,7 +55,7 @@ function downloadfromID(id, version){
         return vers.game_versions.includes(version) && vers.loaders.includes('fabric')
     })[0].files[0].url
     var filename = db.get("preferences.minecraftDir").value()+"/fossmods/"+urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1]
-    if(db.get("modlist").find({downloadID: id}).value() == null){
+    if(db.get("modlist").find({hash: SHA256(id+version).toString()}).value() == null){
         console.log(db.get("modlist").find({filename: filename}).value());
         console.log(filename)
             var file = fs.createWriteStream(filename)
@@ -82,12 +84,13 @@ function downloadfromID(id, version){
                 modtitle = data.title
                 db.get("modlist").push({
                     modname: modtitle,
-                    version: selectedversion,
+                    version: version,
                     enabled: false,
                     filename: urlDownload.toString().split("/")[urlDownload.toString().split("/").length-1],
                     iconURL: data.icon_url,
                     downloadID: id,
-                    description: data.description
+                    description: data.description,
+                    hash: SHA256(id+version).toString()
                 }).write()
             })
     }else{
@@ -130,6 +133,9 @@ function createWin(){
         db.write()
         console.log(downloadID)
         fs.renameSync(db.get("preferences.minecraftDir").value()+"/fossmods/"+db.get("modlist").find({downloadID:downloadID}).value().filename, db.get("preferences.minecraftDir").value()+"/mods/"+db.get("modlist").find({downloadID:downloadID}).value().filename)
+    })
+    ipcMain.on("updateexplore", (event) => {
+        searchMods("lazy")
     })
     ipcMain.on('disableMod', (event, downloadID) => {
         console.log("YOAY")
