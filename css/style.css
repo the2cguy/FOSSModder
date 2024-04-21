@@ -126,6 +126,14 @@ h2{
 .moddescriptiondiv{
     color:#fbf1c7;
 }
+.moddescriptiondiv p{
+    display: inline;
+    padding: 0.5rem;
+    border-radius: 100rem;
+    background: #3c3836;
+    width: 5rem;
+    text-align: center;
+}
 .togglebox{
     align-self: end;
 }
@@ -165,4 +173,11 @@ progress{
 }
 #searchbtn:hover{
     background: #282828;
+}
+.toggle{
+    accent-color: #8ec07c;
+    transform: scale(2);
+}
+.modimgdiv img{
+    width: 70px;
 }
