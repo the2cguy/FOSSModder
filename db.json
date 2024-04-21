@@ -42,6 +42,36 @@
       "downloadID": "EIa1eiMm",
       "description": "Reintroduces vanilla-like smooth lighting to non-full blocks (e.g. dirt paths and how they have dark shading when directly next to a full block) when using Sodium. ",
       "hash": "290ec3e82d967acea4b3e53bb8af77efea0f52305f07f36f83aab59a5356bed5"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.19.1",
+      "enabled": false,
+      "filename": "sodium-fabric-mc1.19.2-0.4.4%2Bbuild.18.jar",
+      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "downloadID": "AANobbMI",
+      "description": "A modern rendering engine for Minecraft which greatly improves performance",
+      "hash": "6413304a58ae6b2847808fcf66d5764cc0f9f53e9335313b268fc93271285441"
+    },
+    {
+      "modname": "Sodium Extra",
+      "version": "1.17.1",
+      "enabled": true,
+      "filename": "sodium-extra-0.4.18%2Bmc1.17.1-build.97.jar",
+      "iconURL": "https://cdn.modrinth.com/data/PtjYWJkn/icon.png",
+      "downloadID": "PtjYWJkn",
+      "description": "A Sodium addon that adds features that shouldn't be in Sodium.",
+      "hash": "7a3789e267cd0cbc31f7f6d439a6baa79f18a428bca930dbb82748d9d3d1eceb"
+    },
+    {
+      "modname": "Sodium",
+      "version": "1.18.1",
+      "enabled": false,
+      "filename": "sodium-fabric-mc1.18.1-0.4.0-alpha6%2Bbuild.14.jar",
+      "iconURL": "https://cdn.modrinth.com/data/AANobbMI/icon.png",
+      "downloadID": "AANobbMI",
+      "description": "A modern rendering engine for Minecraft which greatly improves performance",
+      "hash": "794a85daf6739d0ddffb85bc427b54eab97e06e7e654659ceac36a3fd47c2fb0"
     }
   ]
 }

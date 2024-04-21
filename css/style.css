@@ -4,6 +4,7 @@
 }
 html, body{
     background: #1d2021;
+    scrollbar-width: none;
 }
 button{
     cursor: pointer;

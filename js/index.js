@@ -48,8 +48,8 @@ $(".firstbtn").click(function (e) {
     $(".explore").show();
     $(".modlist").hide();
 });
-$(".explore").hide();
-$(".modlist").show();
+$(".explore").show();
+$(".modlist").hide();
 electronAPI.modExisted(() => {
     alert("Mod already exists!")
 })
