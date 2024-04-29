@@ -123,3 +123,4 @@ $("#searchbtn").click(function (e) {
     e.preventDefault();
     electronAPI.requestexplore($("#searchquery").val())
 });
+electronAPI.requestexplore($("#searchquery").val())
